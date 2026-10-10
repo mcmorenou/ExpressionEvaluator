@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Frontend.Console/Frontend.Console.csproj" />
+  <Project Path="Frontend.Windows/Frontend.Windows.csproj" />
+</Solution>
