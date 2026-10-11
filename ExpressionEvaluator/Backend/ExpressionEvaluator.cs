@@ -3,27 +3,24 @@
 public static class ExpressionEvaluator
 
 {
-    public static double Evalute(string infix)
-    {
-        var postfix = ToPostfix(infix);
-        return EvalutePostfix(postfix);
-    }
+    public static double Evalute(string infix) => EvalutePostfix(ToPostfix(infix));
+    
 
     private static string ToPostfix(string infix)
     {
         var posfix = string.Empty;
         var stack = new Stack<char>();
-        foreach (var item in posfix)
+        foreach (var item in infix)
         {
             if (IsOperator(item))
             {
                 if (item == ')')
                 {
-                  var ope = stack.Pop();
-                    while(ope != '(')
+                    var ope = stack.Pop();
+                    while (ope != '(')
                     {
                         posfix += ope;
-                        ope= stack.Pop();
+                        ope = stack.Pop();
                     }
                 }
                 else
@@ -42,7 +39,7 @@ public static class ExpressionEvaluator
                         else
                         {
                             posfix += stack.Pop();
-
+                            stack.Push(item);
                         }
 
                     }
@@ -94,8 +91,31 @@ public static class ExpressionEvaluator
 
     private static double EvalutePostfix(string postfix)
     {
-        throw new NotImplementedException();
+        var stack = new Stack<double>();
+        foreach (var item in postfix)
+        {
+            if (IsOperator(item))
+            {
+                var ope2 = stack.Pop();
+                var ope1 = stack.Pop();
+                stack.Push(Calculate(ope1, ope2, item));
+            }
+            else
+            {
+                stack.Push(char.GetNumericValue(item));
+            }
+        }
+        return stack.Pop();
     }
 
+    private static double Calculate(double ope1, double ope2, char item) => item switch
+    {
+        '^' => Math.Pow(ope1, ope2),
+        '*' => ope1 * ope2,
+        '/' => ope1 / ope2,
+        '+' => ope1 + ope2,
+        '-' => ope1 - ope2,
+        _ => throw new Exception("Invalid expression."),
+    };
 
 }
