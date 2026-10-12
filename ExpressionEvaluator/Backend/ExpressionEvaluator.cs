@@ -101,7 +101,7 @@ public static class ExpressionEvaluator
     };
 
 
-    private static bool IsOperator(char item) => (item == '^' || item == '+' || item == '*' || item == '/' || item == '+' || item == '-' || item == '(' || item == ')');
+    private static bool IsOperator(char item) => (item == '^' || item == '*' || item == '/' || item == '+' || item == '-' || item == '(' || item == ')');
 
 
     private static double EvalutePostfix(List<string> postfix)
