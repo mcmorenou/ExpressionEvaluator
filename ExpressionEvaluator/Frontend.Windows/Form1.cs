@@ -117,7 +117,7 @@ namespace Frontend.Windows
 
         private void btnResult_Click(object sender, EventArgs e)
         {
-            txtDisplay.Text += $"={ExpressionEvaluator.Evalute(txtDisplay.Text)}";
+            txtDisplay.Text += $"={ExpressionEvaluator.Evaluate(txtDisplay.Text)}";
         }
     }
 }
